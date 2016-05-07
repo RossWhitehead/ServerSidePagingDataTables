@@ -40,10 +40,10 @@ namespace ServerSidePagingDataTables.Controllers
             foreach (var column in sortedColumns)
             {
                 orderByString += orderByString != String.Empty ? "," : "";
-                orderByString += column.Data + (column.SortDirection == Column.OrderDirection.Ascendant ? " asc" : " desc");
+                orderByString += (column.Data == "Category" ? "ProductCategory.Name" : column.Data) + (column.SortDirection == Column.OrderDirection.Ascendant ? " asc" : " desc");
             }
 
-            query = query.OrderBy(orderByString == String.Empty ? "name asc" : orderByString);
+            query = query.OrderBy(orderByString == String.Empty ? "Name asc" : orderByString);
 
             // Paging
             query = query.Skip(requestModel.Start).Take(requestModel.Length);
